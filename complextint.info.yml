@@ -1,0 +1,6 @@
+name: Complextint
+description: "Complextint"
+package: Custom
+type: module
+version: '8.x-1.0'
+core: '8.x'
