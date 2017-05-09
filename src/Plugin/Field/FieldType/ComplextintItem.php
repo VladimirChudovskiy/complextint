@@ -7,6 +7,7 @@ use Drupal\Core\Field\Annotation\FieldType;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\TypedData\DataDefinition;
+use Drupal\Core\Form\FormStateInterface;
 
 
 /**
@@ -52,4 +53,18 @@ class ComplextintItem extends FieldItemBase {
             ]
         ];
     }
+//
+//    public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
+//        $element['target_type'] = [
+//            '#type' => 'select',
+//            '#title' => t('Type of item to reference'),
+//            '#options' => \Drupal::entityManager()->getEntityTypeLabels(TRUE),
+//            '#default_value' => $this->getSetting('target_type'),
+//            '#required' => TRUE,
+//            '#disabled' => $has_data,
+//            '#size' => 1,
+//        ];
+//
+//        return $element;
+//    }
 }

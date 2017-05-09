@@ -7,6 +7,7 @@ use Drupal\Core\Field\Annotation\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * @FieldWidget(
@@ -27,10 +28,19 @@ class ComplextintDefaultWidget extends WidgetBase {
     {
 
         $element['target_id'] = [
-            '#type' => 'textfield',
-            '#title' => t('Count'),
-            '#default_value' => (isset($items[$delta]->target_id)) ? $items[$delta]->target_id : '1',
+            '#type' => 'entity_autocomplete',
+            '#title' => t('Term'),
+            '#target_type' => 'node',
+            '#autocreate' => [
+                'bundle' => 'categories', // Required. The bundle name for the new entity.
+                'uid' => '', // Optional. The user ID for the new entity, if the target entity type implements \Drupal\user\EntityOwnerInterface. Defaults to the current logged-in user.
+            ],
+            //'#default_value' => (isset($items[$delta]->target_id)) ? $items[$delta]->target_id : '1',
         ];
+        if(isset($items[$delta]->target_id)){
+            $element['target_id']['#default_value'] = Node::load($items[$delta]->target_id);
+        }
+
         $element['count'] = [
             '#type' => 'textfield',
             '#title' => t('Count'),
